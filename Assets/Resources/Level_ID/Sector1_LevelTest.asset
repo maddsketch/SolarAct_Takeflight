@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 158c62c47e44bf046bc66addd5e54d46, type: 3}
+  m_Name: Sector1_LevelTest
+  m_EditorClassIdentifier: Assembly-CSharp::LevelDefinition
+  levelID: S001_lvlTest
+  displayName: Sector1_LevelTest
+  sceneName: Sector1_LevelTest
+  waves:
+  - {fileID: 11400000, guid: 945f73483a7f6ad46ba3890ddc872ce9, type: 2}
+  - {fileID: 11400000, guid: bb16884e8e9fcb847a0b0f509fb37ebf, type: 2}
+  difficulty: 1
+  briefingText: "Testing out Scenes\n "
+  creditReward: 500
+  xpReward: 300

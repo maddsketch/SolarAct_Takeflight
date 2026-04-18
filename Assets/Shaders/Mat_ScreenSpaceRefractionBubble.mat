@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Mat_ScreenSpaceRefractionBubble
+  m_Shader: {fileID: 4800000, guid: b2c3d4e5f60718293a4b5c6d7e8f9012, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 1
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs: []
+    m_Ints: []
+    m_Floats:
+    - _BubbleRadius: 0.321
+    - _BubbleStrength: 0.077
+    - _ChromaticAberration: 0.0057
+    - _Cull: 2
+    - _EdgeSoftness: 0.231
+    - _NormalBlend: 0.057
+    - _RimAlphaFalloff: 0.62
+    - _RimIntensity: 0.37
+    - _RimPower: 1.6
+    m_Colors:
+    - _BubbleCenter: {r: 0.5, g: 0.5, b: 0, a: 0}
+    - _RimColor: {r: 0.23113209, g: 0.73696643, b: 1, a: 1}
+    - _Tint: {r: 1, g: 1, b: 1, a: 0.35}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1

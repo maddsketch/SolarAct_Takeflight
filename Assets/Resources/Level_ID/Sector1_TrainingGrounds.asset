@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 158c62c47e44bf046bc66addd5e54d46, type: 3}
+  m_Name: Sector1_TrainingGrounds
+  m_EditorClassIdentifier: Assembly-CSharp::LevelDefinition
+  levelID: S001_TG01
+  displayName: TrainingGrounds
+  sceneName: TrainingGrounds
+  waves:
+  - {fileID: 11400000, guid: 945f73483a7f6ad46ba3890ddc872ce9, type: 2}
+  - {fileID: 11400000, guid: bb16884e8e9fcb847a0b0f509fb37ebf, type: 2}
+  - {fileID: 11400000, guid: 84c6d18050a90a944bd17bfac65c3559, type: 2}
+  - {fileID: 11400000, guid: 3feee6ee9447d7a47b271eccbcf8a2c0, type: 2}
+  - {fileID: 11400000, guid: 8cf02a56a0224b442b315b5027ebacab, type: 2}
+  - {fileID: 11400000, guid: e0b2a377b53892c4eb230adbc7027474, type: 2}
+  - {fileID: 11400000, guid: 91080c5d707ef894e83317237a656f11, type: 2}
+  - {fileID: 11400000, guid: bcf68cafbaf0e1246b0a6b60d938ee03, type: 2}
+  - {fileID: 11400000, guid: ca98b490ec39b104ea7d35b5a7cf0376, type: 2}
+  - {fileID: 11400000, guid: 355317d14a58fd64e936593a46476bfa, type: 2}
+  - {fileID: 11400000, guid: be9a323b375017149bffb7b5fdedae6b, type: 2}
+  - {fileID: 11400000, guid: 4eb7ad6efef0c2d4aa7a6920406ec027, type: 2}
+  - {fileID: 11400000, guid: 211c3cc216c51b94ea51ca09aa25e1e8, type: 2}
+  - {fileID: 11400000, guid: a76ae8caad29feb429d8f3e59d551030, type: 2}
+  - {fileID: 11400000, guid: 1ad3ef912f1f9cd4b9f67c9dfee8008e, type: 2}
+  difficulty: 1
+  briefingText: Time to put you to the test! If you get this, you can retrieve your
+    Fighter Pilot LIcense.
+  creditReward: 500
+  xpReward: 150

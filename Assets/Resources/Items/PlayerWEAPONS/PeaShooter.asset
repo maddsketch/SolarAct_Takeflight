@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 225c2d773c3d86c418278a488f324174, type: 3}
+  m_Name: PeaShooter
+  m_EditorClassIdentifier: Assembly-CSharp::ItemDefinition
+  itemID: PeaShooter
+  displayName: PeaSho Gun
+  icon: {fileID: 21300000, guid: f42280bfe295a3b47a6807129e7c2f37, type: 3}
+  description: Simple Gun element
+  category: 0
+  maxStackSize: 1
+  shopPrice: 0
+  requiredLevel: 1
+  bulletSlots:
+  - bulletPrefab: {fileID: 4737436914770087329, guid: dcb564b3f12f7554db0961a4fadbd327, type: 3}
+    barrelIndex: 3
+    angleOffset: 0
+    positionOffset: {x: 0, y: 0, z: 0}
+    spawnDelay: 0
+    appliesSlow: 0
+    slowPercent: 0
+    slowDuration: 0
+  - bulletPrefab: {fileID: 4737436914770087329, guid: dcb564b3f12f7554db0961a4fadbd327, type: 3}
+    barrelIndex: 4
+    angleOffset: 0
+    positionOffset: {x: 0, y: 0, z: 0}
+    spawnDelay: 0
+    appliesSlow: 0
+    slowPercent: 0
+    slowDuration: 0
+  fireRate: 0.3
+  ammoCapacity: 100
+  infiniteAmmo: 1
+  burstCount: 1
+  burstInterval: 0
+  upgradeType: 0
+  upgradeValue: 0
+  consumableEffect: 0
+  effectValue: 0
+  includesCosmetic: 1
+  cosmeticType: 2
+  hullPrefab: {fileID: 0}
+  skinMaterial: {fileID: 0}
+  accessoryPrefab: {fileID: 2620121798972665098, guid: 8295c0df50e059d408c750fc3d39c640, type: 3}
+  accessorySlot: 1

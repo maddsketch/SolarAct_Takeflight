@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -r \"class\\\\|struct\\\\|interface\" /e/gameDev/takeFlight/Assets/TutorialInfo/Scripts/*.cs)",
+      "Bash(find e:/gameDev/takeFlight/Assets -name *.cs)"
+    ]
+  }
+}

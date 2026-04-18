@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8142077612345678902
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Editor::UnityEditor.Rendering.Universal.AssetVersion
+  version: 10
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: PlanetStylizedUnlit
+  m_Shader: {fileID: 4800000, guid: e4c91fa82b0d4e6f91d3c7a5b8e9f012, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap:
+    RenderType: Opaque
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs: []
+    m_Ints: []
+    m_Floats:
+    - _UseWorldSpace: 1
+    - _NoiseScale: 2.8
+    - _LandThreshold: 0.48
+    - _LandBlend: 0.08
+    - _IceLatitude: 0.82
+    - _RimStrength: 0.55
+    m_Colors:
+    - _PlanetCenter: {r: 0, g: 0, b: 0, a: 0}
+    - _ColOceanDeep: {r: 0.05, g: 0.12, b: 0.35, a: 1}
+    - _ColOceanShore: {r: 0.15, g: 0.45, b: 0.65, a: 1}
+    - _ColLand: {r: 0.25, g: 0.55, b: 0.22, a: 1}
+    - _ColPeak: {r: 0.45, g: 0.38, b: 0.32, a: 1}
+    - _ColIce: {r: 0.92, g: 0.95, b: 1, a: 1}
+    - _RimColor: {r: 0.4, g: 0.65, b: 1, a: 0.85}
+  m_BuildTextureStacks: []
