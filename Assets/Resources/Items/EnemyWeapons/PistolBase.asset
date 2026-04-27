@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PistolBase
   m_EditorClassIdentifier: Assembly-CSharp::EnemyWeaponDefinition
   shotSlots:
-  - bulletPrefab: {fileID: 107259041633248165, guid: 4073ff552a97042469c3293b77cb11fe, type: 3}
+  - bulletPrefab: {fileID: 4737436914770087329, guid: 50dce5ae5f03cb44c9a3b6eab4688c10, type: 3}
     muzzleIndex: 1
     angleOffset: 0
     positionOffset: {x: 0, y: 0, z: 0}
@@ -24,5 +24,5 @@ MonoBehaviour:
   fireRate: 1
   burstCount: 1
   burstInterval: 0.5
-  defaultTargetTag: 
+  defaultTargetTag: Player
   sourceId: EnemyWeapon

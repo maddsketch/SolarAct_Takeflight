@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Ship_Mat.001
-  m_Shader: {fileID: -6465566751694194690, guid: 5aa6b670a3f94f8ba4dfca9c90f2d6b1, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: da719d9aea833824da3051cd208bb133, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -16,7 +16,7 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2000
+  m_CustomRenderQueue: -1
   stringTagMap:
     RenderType: Opaque
   disabledShaderPasses:
@@ -103,11 +103,14 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.4463068
     - _GlossyReflections: 1
+    - _HighlightIntensity: 1.03
+    - _HighlightSoftness: 0.115
+    - _HighlightThreshold: 0.319
     - _IceLatitude: 0.82
     - _LandBlend: 0.08
     - _LandThreshold: 0.48
     - _LineWidth: 0.035
-    - _Metallic: 0.8
+    - _Metallic: 0.54
     - _Mode: 0
     - _NoiseScale: 2.87
     - _OcclusionStrength: 1
@@ -119,7 +122,10 @@ Material:
     - _ReceiveShadows: 1
     - _RenderFace: 2
     - _RimStrength: 0.55
-    - _Smoothness: 0.731
+    - _ShadowSoftness: 0.129
+    - _ShadowStrength: 0.067
+    - _ShadowThreshold: 0.363
+    - _Smoothness: 0.653
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -145,10 +151,12 @@ Material:
     - _ColPeak: {r: 0.45, g: 0.37999994, b: 0.31999996, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}
+    - _HighlightTint: {r: 1, g: 0.83175105, b: 0.4292453, a: 1}
     - _LineColor: {r: 0.049999982, g: 0.049999982, b: 0.059999965, a: 1}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _PlanetCenter: {r: 0, g: 0, b: 0, a: 0}
     - _RimColor: {r: 0.39999998, g: 0.65, b: 1, a: 0.85}
+    - _ShadowTint: {r: 0.23113209, g: 0.59387994, b: 1, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

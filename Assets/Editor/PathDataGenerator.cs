@@ -16,7 +16,7 @@ public class PathDataGenerator : EditorWindow
 
     void OnGUI()
     {
-        GUILayout.Label("Generates all 10 path patterns + mirrored variants.", EditorStyles.wordWrappedLabel);
+        GUILayout.Label("Generates all base and advanced path patterns (36 total).", EditorStyles.wordWrappedLabel);
         GUILayout.Space(8);
 
         if (GUILayout.Button("Generate All Path Data Assets", GUILayout.Height(36)))
@@ -137,6 +137,156 @@ public class PathDataGenerator : EditorWindow
                 new[] {
                     new Vector3(0, 0, -5), new Vector3(0, 0, -5),
                     new Vector3(0, 0, -5), new Vector3(0, 0, -20)
+                }
+            ),
+            (
+                "Path_CenterFeintLeft", 4f,
+                new[] {
+                    new Vector3(0, 0, -4), new Vector3(2, 0, -7),
+                    new Vector3(-4, 0, -11), new Vector3(-4, 0, -20)
+                }
+            ),
+            (
+                "Path_CenterFeintRight", 4f,
+                new[] {
+                    new Vector3(0, 0, -4), new Vector3(-2, 0, -7),
+                    new Vector3(4, 0, -11), new Vector3(4, 0, -20)
+                }
+            ),
+            (
+                "Path_TripleStepLeft", 4f,
+                new[] {
+                    new Vector3(-2, 0, -4), new Vector3(-5, 0, -8),
+                    new Vector3(-2, 0, -12), new Vector3(-5, 0, -16),
+                    new Vector3(0, 0, -22)
+                }
+            ),
+            (
+                "Path_TripleStepRight", 4f,
+                new[] {
+                    new Vector3(2, 0, -4), new Vector3(5, 0, -8),
+                    new Vector3(2, 0, -12), new Vector3(5, 0, -16),
+                    new Vector3(0, 0, -22)
+                }
+            ),
+            (
+                "Path_SpiralInLeft", 5f,
+                new[] {
+                    new Vector3(-6, 0, -4), new Vector3(-3, 0, -8),
+                    new Vector3(-1, 0, -12), new Vector3(0, 0, -18)
+                }
+            ),
+            (
+                "Path_SpiralInRight", 5f,
+                new[] {
+                    new Vector3(6, 0, -4), new Vector3(3, 0, -8),
+                    new Vector3(1, 0, -12), new Vector3(0, 0, -18)
+                }
+            ),
+            (
+                "Path_BreakAndSweepLeft", 4f,
+                new[] {
+                    new Vector3(1, 0, -4), new Vector3(4, 0, -7),
+                    new Vector3(-2, 0, -13), new Vector3(-5, 0, -20)
+                }
+            ),
+            (
+                "Path_BreakAndSweepRight", 4f,
+                new[] {
+                    new Vector3(-1, 0, -4), new Vector3(-4, 0, -7),
+                    new Vector3(2, 0, -13), new Vector3(5, 0, -20)
+                }
+            ),
+            (
+                "Path_DoubleHookLeft", 3f,
+                new[] {
+                    new Vector3(0, 0, -5), new Vector3(-4, 0, -5),
+                    new Vector3(-4, 0, -11), new Vector3(2, 0, -11),
+                    new Vector3(2, 0, -20)
+                }
+            ),
+            (
+                "Path_DoubleHookRight", 3f,
+                new[] {
+                    new Vector3(0, 0, -5), new Vector3(4, 0, -5),
+                    new Vector3(4, 0, -11), new Vector3(-2, 0, -11),
+                    new Vector3(-2, 0, -20)
+                }
+            ),
+            (
+                "Path_LongArcLeft", 4f,
+                new[] {
+                    new Vector3(-1, 0, -3), new Vector3(-3, 0, -7),
+                    new Vector3(-5, 0, -12), new Vector3(-4, 0, -17),
+                    new Vector3(-1, 0, -22)
+                }
+            ),
+            (
+                "Path_LongArcRight", 4f,
+                new[] {
+                    new Vector3(1, 0, -3), new Vector3(3, 0, -7),
+                    new Vector3(5, 0, -12), new Vector3(4, 0, -17),
+                    new Vector3(1, 0, -22)
+                }
+            ),
+            (
+                "Path_StaggerDropLeft", 4f,
+                new[] {
+                    new Vector3(-3, 0, -4), new Vector3(-1, 0, -9),
+                    new Vector3(-4, 0, -14), new Vector3(-2, 0, -20)
+                }
+            ),
+            (
+                "Path_StaggerDropRight", 4f,
+                new[] {
+                    new Vector3(3, 0, -4), new Vector3(1, 0, -9),
+                    new Vector3(4, 0, -14), new Vector3(2, 0, -20)
+                }
+            ),
+            (
+                "Path_DeepDiveLeft", 5f,
+                new[] {
+                    new Vector3(0, 0, -3), new Vector3(-2, 0, -6),
+                    new Vector3(-6, 0, -12), new Vector3(-6, 0, -24)
+                }
+            ),
+            (
+                "Path_DeepDiveRight", 5f,
+                new[] {
+                    new Vector3(0, 0, -3), new Vector3(2, 0, -6),
+                    new Vector3(6, 0, -12), new Vector3(6, 0, -24)
+                }
+            ),
+            (
+                "Path_FlatThenBreakLeft", 4f,
+                new[] {
+                    new Vector3(0, 0, -5), new Vector3(-5, 0, -5),
+                    new Vector3(-1, 0, -10), new Vector3(-4, 0, -16),
+                    new Vector3(0, 0, -22)
+                }
+            ),
+            (
+                "Path_FlatThenBreakRight", 4f,
+                new[] {
+                    new Vector3(0, 0, -5), new Vector3(5, 0, -5),
+                    new Vector3(1, 0, -10), new Vector3(4, 0, -16),
+                    new Vector3(0, 0, -22)
+                }
+            ),
+            (
+                "Path_DriftingSlalomLeft", 4f,
+                new[] {
+                    new Vector3(-2, 0, -3), new Vector3(1, 0, -7),
+                    new Vector3(-3, 0, -11), new Vector3(0, 0, -15),
+                    new Vector3(-2, 0, -20)
+                }
+            ),
+            (
+                "Path_DriftingSlalomRight", 4f,
+                new[] {
+                    new Vector3(2, 0, -3), new Vector3(-1, 0, -7),
+                    new Vector3(3, 0, -11), new Vector3(0, 0, -15),
+                    new Vector3(2, 0, -20)
                 }
             ),
         };

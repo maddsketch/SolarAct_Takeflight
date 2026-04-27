@@ -8,6 +8,7 @@ public class InteractionDetector : MonoBehaviour
 {
     [SerializeField] private float detectionRadius = 2f;
     [SerializeField] private LayerMask interactableLayer;
+    [SerializeField] private int maxDetectedColliders = 24;
 
     // UI listens to this to show/hide the interaction prompt
     public event System.Action<Interactable> onNearestChanged;
@@ -16,11 +17,13 @@ public class InteractionDetector : MonoBehaviour
     private PlayerInput playerInput;
     private InputAction interactAction;
     private OverworldPlayerController playerController;
+    private Collider[] overlapResults;
 
     void Awake()
     {
         playerController = GetComponent<OverworldPlayerController>();
         playerInput = GetComponent<PlayerInput>();
+        overlapResults = new Collider[Mathf.Max(4, maxDetectedColliders)];
         TryResolveInteractAction();
     }
 
@@ -75,20 +78,30 @@ public class InteractionDetector : MonoBehaviour
 
     void RefreshNearest()
     {
-        Collider[] hits = Physics.OverlapSphere(transform.position, detectionRadius, interactableLayer, QueryTriggerInteraction.Collide);
+        if (overlapResults == null || overlapResults.Length != Mathf.Max(4, maxDetectedColliders))
+            overlapResults = new Collider[Mathf.Max(4, maxDetectedColliders)];
+
+        int hitCount = Physics.OverlapSphereNonAlloc(
+            transform.position,
+            detectionRadius,
+            overlapResults,
+            interactableLayer,
+            QueryTriggerInteraction.Collide);
 
         Interactable found = null;
-        float closest = float.MaxValue;
+        float closestSqr = float.MaxValue;
+        Vector3 origin = transform.position;
 
-        foreach (var hit in hits)
+        for (int i = 0; i < hitCount; i++)
         {
+            Collider hit = overlapResults[i];
             var interactable = hit.GetComponent<Interactable>();
             if (interactable == null) continue;
 
-            float dist = Vector3.Distance(transform.position, hit.transform.position);
-            if (dist < closest)
+            float distSqr = (hit.transform.position - origin).sqrMagnitude;
+            if (distSqr < closestSqr)
             {
-                closest = dist;
+                closestSqr = distSqr;
                 found = interactable;
             }
         }

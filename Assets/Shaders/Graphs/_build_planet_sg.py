@@ -481,7 +481,7 @@ parts.append({
     "m_Labels": [],
 })
 parts.append({
-    "m_SGVersion": 0,
+    "m_SGVersion": 1,
     "m_Type": "UnityEditor.ShaderGraph.NormalVectorNode",
     "m_ObjectId": n_norm,
     "m_Group": {"m_Id": ""},
@@ -512,7 +512,7 @@ parts.append({
     "m_Labels": [],
 })
 parts.append({
-    "m_SGVersion": 0,
+    "m_SGVersion": 1,
     "m_Type": "UnityEditor.ShaderGraph.ViewDirectionNode",
     "m_ObjectId": n_view,
     "m_Group": {"m_Id": ""},

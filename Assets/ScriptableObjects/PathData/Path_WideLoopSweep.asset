@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PathData
   waypoints:
   - {x: -2, y: 0, z: -3}
-  - {x: -5, y: 0, z: -6}
-  - {x: -5, y: 0, z: -10}
+  - {x: -8.51, y: 0, z: -6}
+  - {x: -7.26, y: 0, z: -10}
   - {x: -2, y: 0, z: -14}
   - {x: 2, y: 0, z: -20}
   moveSpeed: 4

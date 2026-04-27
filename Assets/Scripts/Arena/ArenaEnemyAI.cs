@@ -37,12 +37,16 @@ public class ArenaEnemyAI : MonoBehaviour
     private Vector3 wanderDirection;
     private float wanderTimer;
     private EnemyPatternShooter patternShooter;
+    private Transform[] fallbackFirePointMuzzles;
+    private Transform[] fallbackSelfMuzzles;
 
     void Awake()
     {
         var health = GetComponent<Health>();
         health.onDeath.AddListener(OnDeath);
         patternShooter = GetComponent<EnemyPatternShooter>();
+        fallbackFirePointMuzzles = new Transform[1];
+        fallbackSelfMuzzles = new[] { transform };
         MinimapUI.Register(this);
     }
 
@@ -147,9 +151,12 @@ public class ArenaEnemyAI : MonoBehaviour
             return weaponMuzzles;
 
         if (firePoint != null)
-            return new[] { firePoint };
+        {
+            fallbackFirePointMuzzles[0] = firePoint;
+            return fallbackFirePointMuzzles;
+        }
 
-        return new[] { transform };
+        return fallbackSelfMuzzles;
     }
 
     private void PickWanderDirection()

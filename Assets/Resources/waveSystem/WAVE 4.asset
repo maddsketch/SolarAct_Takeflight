@@ -18,8 +18,16 @@ MonoBehaviour:
     delay: 0
     pathData: {fileID: 11400000, guid: 4b4e57272835a9b489e0d5cd7955634b, type: 2}
   - enemyPrefab: {fileID: 5136591338895854782, guid: 62dc487a1473930479aaf1366a70d9c0, type: 3}
+    spawnPosition: {x: -2, y: 0, z: 9}
+    delay: 0.5
+    pathData: {fileID: 11400000, guid: 4b4e57272835a9b489e0d5cd7955634b, type: 2}
+  - enemyPrefab: {fileID: 5136591338895854782, guid: 62dc487a1473930479aaf1366a70d9c0, type: 3}
     spawnPosition: {x: 0, y: 0, z: 10}
     delay: 1.5
+    pathData: {fileID: 11400000, guid: 19201c735dbdb174c8f5c7d4c1fc30be, type: 2}
+  - enemyPrefab: {fileID: 5136591338895854782, guid: 62dc487a1473930479aaf1366a70d9c0, type: 3}
+    spawnPosition: {x: 0, y: 0, z: 10}
+    delay: 2
     pathData: {fileID: 11400000, guid: 19201c735dbdb174c8f5c7d4c1fc30be, type: 2}
   - enemyPrefab: {fileID: 5136591338895854782, guid: 62dc487a1473930479aaf1366a70d9c0, type: 3}
     spawnPosition: {x: 2, y: 0, z: 9}

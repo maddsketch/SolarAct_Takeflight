@@ -13,17 +13,33 @@ MonoBehaviour:
   m_Name: WAVE 3
   m_EditorClassIdentifier: Assembly-CSharp::WaveDefinition
   spawnInstructions:
-  - enemyPrefab: {fileID: 5136591338895854782, guid: 62dc487a1473930479aaf1366a70d9c0, type: 3}
+  - enemyPrefab: {fileID: 3528277408107683994, guid: 00adc5c7b6ac1e247bf3801235d70db8, type: 3}
     spawnPosition: {x: -3, y: 0, z: 9}
     delay: 0
     pathData: {fileID: 11400000, guid: feb41c1254d92594aab9e80889f20afc, type: 2}
-  - enemyPrefab: {fileID: 5136591338895854782, guid: 62dc487a1473930479aaf1366a70d9c0, type: 3}
+  - enemyPrefab: {fileID: 3528277408107683994, guid: 00adc5c7b6ac1e247bf3801235d70db8, type: 3}
+    spawnPosition: {x: -3.58, y: 0, z: 9}
+    delay: 0.4
+    pathData: {fileID: 11400000, guid: feb41c1254d92594aab9e80889f20afc, type: 2}
+  - enemyPrefab: {fileID: 3528277408107683994, guid: 00adc5c7b6ac1e247bf3801235d70db8, type: 3}
+    spawnPosition: {x: -3.58, y: 0, z: 9}
+    delay: 0.7
+    pathData: {fileID: 11400000, guid: feb41c1254d92594aab9e80889f20afc, type: 2}
+  - enemyPrefab: {fileID: 3528277408107683994, guid: 00adc5c7b6ac1e247bf3801235d70db8, type: 3}
     spawnPosition: {x: 0, y: 0, z: 9}
     delay: 1.5
     pathData: {fileID: 11400000, guid: 19201c735dbdb174c8f5c7d4c1fc30be, type: 2}
-  - enemyPrefab: {fileID: 5136591338895854782, guid: 62dc487a1473930479aaf1366a70d9c0, type: 3}
+  - enemyPrefab: {fileID: 3528277408107683994, guid: 00adc5c7b6ac1e247bf3801235d70db8, type: 3}
+    spawnPosition: {x: 0, y: 0, z: 9}
+    delay: 1.5
+    pathData: {fileID: 11400000, guid: 19201c735dbdb174c8f5c7d4c1fc30be, type: 2}
+  - enemyPrefab: {fileID: 3528277408107683994, guid: 00adc5c7b6ac1e247bf3801235d70db8, type: 3}
     spawnPosition: {x: 3, y: 0, z: 9}
     delay: 3
+    pathData: {fileID: 11400000, guid: 98d5cc724b88cb640947b61f67d755a0, type: 2}
+  - enemyPrefab: {fileID: 3528277408107683994, guid: 00adc5c7b6ac1e247bf3801235d70db8, type: 3}
+    spawnPosition: {x: 3.8, y: 0, z: 9}
+    delay: 3.4
     pathData: {fileID: 11400000, guid: 98d5cc724b88cb640947b61f67d755a0, type: 2}
   clearCondition: 0
   timerDuration: 10

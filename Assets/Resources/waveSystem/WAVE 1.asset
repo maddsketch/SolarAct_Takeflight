@@ -13,27 +13,27 @@ MonoBehaviour:
   m_Name: WAVE 1
   m_EditorClassIdentifier: Assembly-CSharp::WaveDefinition
   spawnInstructions:
-  - enemyPrefab: {fileID: 5136591338895854782, guid: 62dc487a1473930479aaf1366a70d9c0, type: 3}
+  - enemyPrefab: {fileID: 754960969970593261, guid: d0d9a8c014d3aea409ba807d23bf9fc3, type: 3}
     spawnPosition: {x: -1, y: 0, z: 9}
     delay: 0
     pathData: {fileID: 11400000, guid: 19201c735dbdb174c8f5c7d4c1fc30be, type: 2}
-  - enemyPrefab: {fileID: 5136591338895854782, guid: 62dc487a1473930479aaf1366a70d9c0, type: 3}
+  - enemyPrefab: {fileID: 754960969970593261, guid: d0d9a8c014d3aea409ba807d23bf9fc3, type: 3}
     spawnPosition: {x: -1, y: 0, z: 9}
     delay: 0.3
     pathData: {fileID: 11400000, guid: 19201c735dbdb174c8f5c7d4c1fc30be, type: 2}
-  - enemyPrefab: {fileID: 5136591338895854782, guid: 62dc487a1473930479aaf1366a70d9c0, type: 3}
+  - enemyPrefab: {fileID: 754960969970593261, guid: d0d9a8c014d3aea409ba807d23bf9fc3, type: 3}
     spawnPosition: {x: -1, y: 0, z: 9}
     delay: 0.6
     pathData: {fileID: 11400000, guid: 19201c735dbdb174c8f5c7d4c1fc30be, type: 2}
-  - enemyPrefab: {fileID: 5136591338895854782, guid: 62dc487a1473930479aaf1366a70d9c0, type: 3}
+  - enemyPrefab: {fileID: 754960969970593261, guid: d0d9a8c014d3aea409ba807d23bf9fc3, type: 3}
     spawnPosition: {x: 1, y: 0, z: 9}
     delay: 1.5
     pathData: {fileID: 11400000, guid: 19201c735dbdb174c8f5c7d4c1fc30be, type: 2}
-  - enemyPrefab: {fileID: 5136591338895854782, guid: 62dc487a1473930479aaf1366a70d9c0, type: 3}
+  - enemyPrefab: {fileID: 754960969970593261, guid: d0d9a8c014d3aea409ba807d23bf9fc3, type: 3}
     spawnPosition: {x: 1, y: 0, z: 9}
     delay: 1.8
     pathData: {fileID: 11400000, guid: 19201c735dbdb174c8f5c7d4c1fc30be, type: 2}
-  - enemyPrefab: {fileID: 5136591338895854782, guid: 62dc487a1473930479aaf1366a70d9c0, type: 3}
+  - enemyPrefab: {fileID: 754960969970593261, guid: d0d9a8c014d3aea409ba807d23bf9fc3, type: 3}
     spawnPosition: {x: 1, y: 0, z: 9}
     delay: 2.1
     pathData: {fileID: 11400000, guid: 19201c735dbdb174c8f5c7d4c1fc30be, type: 2}

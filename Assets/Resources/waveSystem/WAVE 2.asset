@@ -13,28 +13,28 @@ MonoBehaviour:
   m_Name: WAVE 2
   m_EditorClassIdentifier: Assembly-CSharp::WaveDefinition
   spawnInstructions:
-  - enemyPrefab: {fileID: 5136591338895854782, guid: 62dc487a1473930479aaf1366a70d9c0, type: 3}
+  - enemyPrefab: {fileID: 754960969970593261, guid: d0d9a8c014d3aea409ba807d23bf9fc3, type: 3}
     spawnPosition: {x: -3, y: 0, z: 9}
     delay: 0
     pathData: {fileID: 11400000, guid: feb41c1254d92594aab9e80889f20afc, type: 2}
-  - enemyPrefab: {fileID: 5136591338895854782, guid: 62dc487a1473930479aaf1366a70d9c0, type: 3}
-    spawnPosition: {x: -3, y: 0, z: 9}
+  - enemyPrefab: {fileID: 754960969970593261, guid: d0d9a8c014d3aea409ba807d23bf9fc3, type: 3}
+    spawnPosition: {x: -4, y: 0, z: 9}
     delay: 0.3
     pathData: {fileID: 11400000, guid: feb41c1254d92594aab9e80889f20afc, type: 2}
-  - enemyPrefab: {fileID: 5136591338895854782, guid: 62dc487a1473930479aaf1366a70d9c0, type: 3}
-    spawnPosition: {x: -3, y: 0, z: 9}
+  - enemyPrefab: {fileID: 754960969970593261, guid: d0d9a8c014d3aea409ba807d23bf9fc3, type: 3}
+    spawnPosition: {x: -5, y: 0, z: 9}
     delay: 0.6
     pathData: {fileID: 11400000, guid: feb41c1254d92594aab9e80889f20afc, type: 2}
-  - enemyPrefab: {fileID: 5136591338895854782, guid: 62dc487a1473930479aaf1366a70d9c0, type: 3}
+  - enemyPrefab: {fileID: 754960969970593261, guid: d0d9a8c014d3aea409ba807d23bf9fc3, type: 3}
     spawnPosition: {x: 3, y: 0, z: 9}
     delay: 2
     pathData: {fileID: 11400000, guid: 98d5cc724b88cb640947b61f67d755a0, type: 2}
-  - enemyPrefab: {fileID: 5136591338895854782, guid: 62dc487a1473930479aaf1366a70d9c0, type: 3}
-    spawnPosition: {x: 3, y: 0, z: 9}
+  - enemyPrefab: {fileID: 754960969970593261, guid: d0d9a8c014d3aea409ba807d23bf9fc3, type: 3}
+    spawnPosition: {x: 4, y: 0, z: 9}
     delay: 2.3
     pathData: {fileID: 11400000, guid: 98d5cc724b88cb640947b61f67d755a0, type: 2}
-  - enemyPrefab: {fileID: 5136591338895854782, guid: 62dc487a1473930479aaf1366a70d9c0, type: 3}
-    spawnPosition: {x: 3, y: 0, z: 9}
+  - enemyPrefab: {fileID: 754960969970593261, guid: d0d9a8c014d3aea409ba807d23bf9fc3, type: 3}
+    spawnPosition: {x: 5, y: 0, z: 9}
     delay: 2.6
     pathData: {fileID: 11400000, guid: 98d5cc724b88cb640947b61f67d755a0, type: 2}
   clearCondition: 0

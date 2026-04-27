@@ -72,9 +72,8 @@ public class WaveManager : MonoBehaviour
 
         activeEnemies.Add(enemy);
 
-        var health = enemy.GetComponent<Health>();
-        if (health != null)
-            health.onDeath.AddListener(() => activeEnemies.Remove(enemy));
+        // Keep lifetime tracking polling-based (AllEnemiesDead removes null entries)
+        // to avoid retaining closures/listeners per spawn.
     }
 
     bool AllEnemiesDead()

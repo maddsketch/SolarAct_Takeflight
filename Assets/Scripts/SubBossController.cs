@@ -46,6 +46,7 @@ public class SubBossController : MonoBehaviour
     private Phase currentPhase = Phase.Enter;
     private Coroutine attackCoroutine;
     private EnemyPatternShooter patternShooter;
+    private Transform[] phase1Muzzles;
 
     private float patrolOriginX;
     private float patrolTimer;
@@ -54,6 +55,8 @@ public class SubBossController : MonoBehaviour
     {
         health = GetComponent<Health>();
         patternShooter = GetComponent<EnemyPatternShooter>();
+        phase1Muzzles = new Transform[4];
+        RefreshPhase1Muzzles();
         health.onDeath.AddListener(OnDeath);
         health.onHealthChanged.AddListener(OnHealthChanged);
     }
@@ -170,9 +173,10 @@ public class SubBossController : MonoBehaviour
         {
             if (phase1Weapon != null && patternShooter != null)
             {
+                RefreshPhase1Muzzles();
                 patternShooter.FirePattern(
                     phase1Weapon,
-                    new[] { firePointFront, firePointLeft, firePointRight, firePointRear },
+                    phase1Muzzles,
                     Vector3.back,
                     "Player");
             }
@@ -184,6 +188,14 @@ public class SubBossController : MonoBehaviour
             }
             yield return new WaitForSeconds(phase1FireRate);
         }
+    }
+
+    void RefreshPhase1Muzzles()
+    {
+        phase1Muzzles[0] = firePointFront;
+        phase1Muzzles[1] = firePointLeft;
+        phase1Muzzles[2] = firePointRight;
+        phase1Muzzles[3] = firePointRear;
     }
 
     IEnumerator Phase2Attack()
