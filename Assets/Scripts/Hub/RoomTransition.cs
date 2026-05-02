@@ -92,7 +92,18 @@ public class RoomTransition : MonoBehaviour
     {
         if (enterPrompt == null) return;
         if (enterPromptText != null) enterPromptText.text = enterPromptMessage;
-        enterPrompt.SetActive(show);
+
+        var fade = enterPrompt.GetComponent<UIFadeController>();
+        if (show)
+        {
+            enterPrompt.SetActive(true);
+            if (fade != null) fade.Show();
+        }
+        else
+        {
+            if (fade != null) fade.Hide();
+            enterPrompt.SetActive(false);
+        }
     }
 
     private IEnumerator DoTransition(GameObject player)

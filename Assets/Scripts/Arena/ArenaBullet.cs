@@ -8,6 +8,7 @@ public class ArenaBullet : MonoBehaviour
     [SerializeField] private float speed  = 18f;
     [SerializeField] private int   damage = 1;
     [SerializeField] private float lifetime = 3f;
+    [SerializeField, Min(0f)] private float impactMagnitude = 1f;
     [Header("On-Hit Effects")]
     [SerializeField] private bool appliesSlow;
     [SerializeField, Range(0f, 0.95f)] private float slowPercent;
@@ -55,7 +56,7 @@ public class ArenaBullet : MonoBehaviour
     {
         if (!other.CompareTag(targetTag)) return;
 
-        other.GetComponent<Health>()?.TakeDamage(damage);
+        other.GetComponent<Health>()?.TakeDamage(damage, impactMagnitude);
         if (appliesSlow)
             other.GetComponent<MovementStatusEffects>()?.ApplySlow(slowPercent, slowDuration, slowSourceId);
         Destroy(gameObject);

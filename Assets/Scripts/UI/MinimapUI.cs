@@ -17,30 +17,41 @@ public class MinimapUI : MonoBehaviour
     private Transform playerTransform;
     private float arenaRadius;
 
-    private static readonly List<ArenaEnemyAI> registeredEnemies = new();
-    private readonly Dictionary<ArenaEnemyAI, ArenaDot> dots = new();
+    private static readonly HashSet<Transform> registeredTargets = new();
+    private readonly Dictionary<Transform, ArenaDot> dots = new();
     private ArenaDot playerDot;
 
     // --- Static registration API called by ArenaEnemyAI ---
 
     public static void Register(ArenaEnemyAI enemy)
     {
-        if (!registeredEnemies.Contains(enemy))
-            registeredEnemies.Add(enemy);
+        if (enemy == null) return;
+        RegisterTarget(enemy.transform);
+    }
 
-        _instance?.AddDot(enemy);
+    public static void RegisterTarget(Transform target)
+    {
+        if (target == null) return;
+        registeredTargets.Add(target);
+        _instance?.AddDot(target);
     }
 
     public static void Unregister(ArenaEnemyAI enemy)
     {
-        registeredEnemies.Remove(enemy);
+        if (enemy == null) return;
+        UnregisterTarget(enemy.transform);
+    }
 
-        if (_instance != null && _instance.dots.TryGetValue(enemy, out var dot))
+    public static void UnregisterTarget(Transform target)
+    {
+        if (target == null) return;
+        registeredTargets.Remove(target);
+
+        if (_instance != null && _instance.dots.TryGetValue(target, out var dot))
         {
             if (dot != null) Destroy(dot.gameObject);
-            _instance.dots.Remove(enemy);
+            _instance.dots.Remove(target);
         }
-
     }
 
     // --- Lifecycle ---
@@ -66,24 +77,59 @@ public class MinimapUI : MonoBehaviour
         }
 
         // Catch any enemies that registered before Start ran
-        foreach (var enemy in registeredEnemies)
-            AddDot(enemy);
+        foreach (var target in registeredTargets)
+            AddDot(target);
     }
 
     void OnDestroy()
     {
         if (_instance == this) _instance = null;
-        registeredEnemies.Clear();
+        registeredTargets.Clear();
     }
 
-    private void AddDot(ArenaEnemyAI enemy)
+    void LateUpdate()
+    {
+        if (dots.Count == 0) return;
+
+        // Clean up stale targets in case objects are destroyed before explicit unregister.
+        var staleTargets = ListPool<Transform>.Get();
+        foreach (var pair in dots)
+        {
+            if (pair.Key != null) continue;
+
+            if (pair.Value != null)
+                Destroy(pair.Value.gameObject);
+
+            staleTargets.Add(pair.Key);
+        }
+
+        for (int i = 0; i < staleTargets.Count; i++)
+            dots.Remove(staleTargets[i]);
+
+        ListPool<Transform>.Release(staleTargets);
+    }
+
+    private void AddDot(Transform target)
     {
         if (dotPrefab == null || playerTransform == null) return;
-        if (dots.ContainsKey(enemy)) return;
+        if (target == null || dots.ContainsKey(target)) return;
 
         var go  = Instantiate(dotPrefab, dotContainer);
         var dot = go.GetComponent<ArenaDot>();
-        dot?.Init(enemy.transform, playerTransform, arenaRadius, minimapRadius, enemyDotColor);
-        dots[enemy] = dot;
+        dot?.Init(target, playerTransform, arenaRadius, minimapRadius, enemyDotColor);
+        dots[target] = dot;
+    }
+}
+
+internal static class ListPool<T>
+{
+    private static readonly Stack<List<T>> Pool = new();
+
+    public static List<T> Get() => Pool.Count > 0 ? Pool.Pop() : new List<T>();
+
+    public static void Release(List<T> list)
+    {
+        list.Clear();
+        Pool.Push(list);
     }
 }

@@ -29,5 +29,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ConstructMap.unity
     guid: 76b7bb0850fa8154aa1820ebd9d842f8
+  - enabled: 1
+    path: Assets/Scenes/Sector1_Level10_Arena.unity
+    guid: b1214e9fafa67974a90681923a8430f8
+  - enabled: 1
+    path: Assets/Scenes/Sector1_TrainingGrounds.unity
+    guid: dc780860764c46f4896e89bdd7ac7676
   m_configObjects:
+    com.unity.input.settings: {fileID: 11400000, guid: 7660c9ae75f4c7c48b164e465f1be112, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

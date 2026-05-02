@@ -28,8 +28,20 @@ public class CameraFollow : MonoBehaviour
     [SerializeField] private float maxLookAheadDistance = 3f; // max camera shift from target
     [SerializeField] private float lookAheadSpeed       = 4f; // how quickly offset tracks target look-ahead
     [SerializeField] private float deadZone             = 0.08f; // normalized center zone (mouse mode only)
+    [Header("Damage Shake")]
+    [SerializeField, Min(0f)] private float heavyHitImpactThreshold = 1.5f;
+    [SerializeField, Min(0f)] private float heavyHitShakeDuration = 0.12f;
+    [SerializeField, Min(0f)] private float heavyHitShakeAmplitude = 0.2f;
+    [SerializeField, Min(0f)] private float heavyHitShakeFrequency = 45f;
 
     private Vector3 currentLookAhead;
+    private float shakeTimer;
+    private float shakeSeed;
+
+    void Awake()
+    {
+        shakeSeed = Random.Range(0f, 1000f);
+    }
 
     void LateUpdate()
     {
@@ -55,7 +67,15 @@ public class CameraFollow : MonoBehaviour
             height,
             target.position.z + currentLookAhead.z);
 
-        transform.position = Vector3.Lerp(transform.position, desired, smoothSpeed * Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, desired, smoothSpeed * Time.deltaTime) + ComputeShakeOffset();
+    }
+
+    public void TriggerHeavyHitShake(float impactMagnitude)
+    {
+        if (impactMagnitude < heavyHitImpactThreshold || heavyHitShakeDuration <= 0f || heavyHitShakeAmplitude <= 0f)
+            return;
+
+        shakeTimer = Mathf.Max(shakeTimer, heavyHitShakeDuration);
     }
 
     private Vector3 ComputeMouseScreenSpaceLookAhead()
@@ -96,5 +116,19 @@ public class CameraFollow : MonoBehaviour
 
         fwd.Normalize();
         return fwd * maxLookAheadDistance;
+    }
+
+    private Vector3 ComputeShakeOffset()
+    {
+        if (shakeTimer <= 0f)
+            return Vector3.zero;
+
+        shakeTimer = Mathf.Max(0f, shakeTimer - Time.deltaTime);
+        float normalizedLife = heavyHitShakeDuration <= 0f ? 0f : (shakeTimer / heavyHitShakeDuration);
+        float damping = normalizedLife * normalizedLife;
+        float time = Time.time * heavyHitShakeFrequency;
+        float offsetX = (Mathf.PerlinNoise(shakeSeed, time) - 0.5f) * 2f;
+        float offsetZ = (Mathf.PerlinNoise(shakeSeed + 13.7f, time) - 0.5f) * 2f;
+        return new Vector3(offsetX, 0f, offsetZ) * (heavyHitShakeAmplitude * damping);
     }
 }

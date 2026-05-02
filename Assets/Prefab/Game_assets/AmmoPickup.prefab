@@ -84,7 +84,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AmmoPickup
   ammoAmount: 30
-  pickupVfxPrefab: {fileID: 0}
+  pickupVfxPrefab: {fileID: 3022102558446658867, guid: cd3d579a2d65b3241a1812f639db37ec, type: 3}
   pickupVfxLifetime: 2
 --- !u!1 &5416576565682397054
 GameObject:

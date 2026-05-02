@@ -16,13 +16,12 @@ public class UIManager : MonoBehaviour
 
     private Coroutine lowHealthPulseRoutine;
     private bool isLowHealthActive;
+    private bool gameManagerSubscribed;
 
     void Start()
     {
         ResolvePlayerHealth();
-
-        GameManager.Instance.onScoreChanged += UpdateScore;
-        GameManager.Instance.onGameOver += ShowGameOver;
+        TrySubscribeGameManager();
 
         UpdateScore(0);
 
@@ -34,13 +33,15 @@ public class UIManager : MonoBehaviour
 
     void Update()
     {
+        TrySubscribeGameManager();
+
         if (playerHealth == null)
             ResolvePlayerHealth();
     }
 
     void OnDestroy()
     {
-        if (GameManager.Instance != null)
+        if (gameManagerSubscribed && GameManager.Instance != null)
         {
             GameManager.Instance.onScoreChanged -= UpdateScore;
             GameManager.Instance.onGameOver -= ShowGameOver;
@@ -51,6 +52,16 @@ public class UIManager : MonoBehaviour
 
         StopLowHealthPulse();
         SetLowHealthVisuals(false, 0f);
+    }
+
+    private void TrySubscribeGameManager()
+    {
+        if (gameManagerSubscribed || GameManager.Instance == null)
+            return;
+
+        GameManager.Instance.onScoreChanged += UpdateScore;
+        GameManager.Instance.onGameOver += ShowGameOver;
+        gameManagerSubscribed = true;
     }
 
     private void ResolvePlayerHealth()

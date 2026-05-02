@@ -14,6 +14,9 @@ public class ShipCosmeticApplicator : MonoBehaviour
     [SerializeField] private Transform[] accessoryMountPoints;
 
     private GameObject currentHullInstance;
+    private Material skinMaterialInstance;
+    private Renderer skinMaterialRenderer;
+    private Material skinSourceAsset;
 
     void Start()
     {
@@ -27,6 +30,14 @@ public class ShipCosmeticApplicator : MonoBehaviour
     {
         if (InventoryManager.Instance != null)
             InventoryManager.Instance.OnCosmeticChanged -= Apply;
+
+        if (skinMaterialInstance != null)
+        {
+            Destroy(skinMaterialInstance);
+            skinMaterialInstance = null;
+        }
+        skinMaterialRenderer = null;
+        skinSourceAsset = null;
     }
 
     public void Apply()
@@ -123,8 +134,21 @@ public class ShipCosmeticApplicator : MonoBehaviour
             mat = weaponCosmetic.skinMaterial;
         }
 
-        if (mat != null)
-            shipRenderer.material = mat;
+        if (mat == null) return;
+
+        if (skinMaterialRenderer != shipRenderer || skinSourceAsset != mat)
+        {
+            if (skinMaterialInstance != null)
+            {
+                Destroy(skinMaterialInstance);
+                skinMaterialInstance = null;
+            }
+
+            skinMaterialRenderer = shipRenderer;
+            skinSourceAsset = mat;
+            skinMaterialInstance = new Material(mat);
+            shipRenderer.material = skinMaterialInstance;
+        }
     }
 
     private void ApplyAccessories(ItemDefinition weaponCosmetic)

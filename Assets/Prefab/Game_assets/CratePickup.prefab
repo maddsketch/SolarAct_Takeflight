@@ -71,6 +71,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CreditPickup
   creditAmount: 30
   lifetime: 50
+  pickupVfxPrefab: {fileID: 3022102558446658867, guid: cd3d579a2d65b3241a1812f639db37ec, type: 3}
+  pickupVfxLifetime: 2
 --- !u!114 &7061833690568581003
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -11,6 +11,7 @@ public class ShopManager : MonoBehaviour
 
     public event System.Action<ShopDefinition> onShopOpen;
     public event System.Action onShopClose;
+    public event System.Action<ItemDefinition> onPurchaseSucceeded;
 
     void Awake()
     {
@@ -70,6 +71,7 @@ public class ShopManager : MonoBehaviour
             return false;
         }
 
+        onPurchaseSucceeded?.Invoke(def);
         return true;
     }
 }

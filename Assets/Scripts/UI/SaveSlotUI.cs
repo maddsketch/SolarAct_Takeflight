@@ -19,6 +19,9 @@ public class SaveSlotUI : MonoBehaviour
     private int slotIndex;
     private Action<int> onSelect;
 
+    /// <summary>Primary slot choice button — use for UI/gamepad focus.</summary>
+    public Button SelectButton => selectButton;
+
     void Start()
     {
         deleteButton.onClick.AddListener(() => deleteConfirmPanel.SetActive(true));

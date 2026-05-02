@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
@@ -54,6 +55,8 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private float fadeDuration = 0.5f;
 
     private bool isNewGame;  // true = new game slot selection, false = continue
+
+    private Coroutine selectionCoroutine;
 
     // ---------------------------------------------------------------
 
@@ -111,6 +114,67 @@ public class MainMenuManager : MonoBehaviour
         saveSlotPanel.SetActive(target == saveSlotPanel);
         settingsPanel.SetActive(target == settingsPanel);
         creditsPanel.SetActive(target == creditsPanel);
+
+        ScheduleUISelection(ResolveDefaultSelectable(target));
+    }
+
+    static GameObject ResolveButtonGameObject(Button button)
+    {
+        return button != null ? button.gameObject : null;
+    }
+
+    GameObject ResolveDefaultSelectable(GameObject targetPanel)
+    {
+        if (targetPanel == startPanel)
+            return ResolveButtonGameObject(startButton);
+        if (targetPanel == titlePanel)
+            return ResolveButtonGameObject(newGameButton);
+        if (targetPanel == saveSlotPanel)
+            return FirstInteractableSaveSlot() ?? ResolveButtonGameObject(saveSlotBackButton);
+        if (targetPanel == settingsPanel)
+        {
+            if (masterVolumeSlider != null)
+                return masterVolumeSlider.gameObject;
+            return ResolveButtonGameObject(settingsBackButton);
+        }
+        if (targetPanel == creditsPanel)
+            return ResolveButtonGameObject(creditsBackButton);
+
+        return null;
+    }
+
+    GameObject FirstInteractableSaveSlot()
+    {
+        if (saveSlots == null) return null;
+        for (int i = 0; i < saveSlots.Length; i++)
+        {
+            var btn = saveSlots[i] != null ? saveSlots[i].SelectButton : null;
+            if (btn != null && btn.interactable && btn.gameObject.activeInHierarchy)
+                return btn.gameObject;
+        }
+
+        return null;
+    }
+
+    void ScheduleUISelection(GameObject selection)
+    {
+        if (selectionCoroutine != null)
+            StopCoroutine(selectionCoroutine);
+        selectionCoroutine = StartCoroutine(CoApplyUISelection(selection));
+    }
+
+    IEnumerator CoApplyUISelection(GameObject selection)
+    {
+        yield return null;
+
+        if (selection == null || !selection.activeInHierarchy)
+            yield break;
+
+        EventSystem es = EventSystem.current;
+        if (es == null)
+            yield break;
+
+        es.SetSelectedGameObject(selection);
     }
 
     void OpenNewGame()
@@ -146,7 +210,9 @@ public class MainMenuManager : MonoBehaviour
             if (!isNewGame)
             {
                 bool hasSave = GameStateManager.Instance != null && GameStateManager.Instance.HasSave(slot);
-                saveSlots[i].GetComponentInChildren<Button>().interactable = hasSave;
+                var sel = saveSlots[i].SelectButton;
+                if (sel != null)
+                    sel.interactable = hasSave;
             }
         }
     }

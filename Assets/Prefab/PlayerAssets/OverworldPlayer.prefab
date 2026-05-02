@@ -63,8 +63,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1133256173259699286}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.44360343, z: 0, w: -0.8962232}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0.0033383542, z: 0, w: 0.99999446}
+  m_LocalPosition: {x: -14.502256, y: 0, z: 14.116894}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -145,6 +145,9 @@ MonoBehaviour:
   sprintMultiplier: 1.8
   rotationSpeed: 720
   moveSmoothTime: 0.3
+  rotationDeadzone: 0.01
+  lockYPosition: 1
+  lockedYPosition: 0
   thrusterParticles:
   - {fileID: 8911406493152875915}
   - {fileID: 4879227480847242372}
@@ -185,6 +188,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   onDamaged:
+    m_PersistentCalls:
+      m_Calls: []
+  onDamagedWithImpact:
     m_PersistentCalls:
       m_Calls: []
   onHealthChanged:

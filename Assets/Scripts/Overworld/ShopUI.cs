@@ -13,13 +13,18 @@ public class ShopUI : MonoBehaviour
     [SerializeField] private Transform itemListParent;
     [SerializeField] private GameObject shopItemPrefab;
     [SerializeField] private Button closeButton;
+    [SerializeField] private ShopPurchasePopupUI purchasePopup;
 
     private ShopItemUI[] itemRows = System.Array.Empty<ShopItemUI>();
 
     void Start()
     {
+        if (purchasePopup == null)
+            purchasePopup = GetComponent<ShopPurchasePopupUI>();
+
         ShopManager.Instance.onShopOpen  += OnShopOpen;
         ShopManager.Instance.onShopClose += OnShopClose;
+        ShopManager.Instance.onPurchaseSucceeded += OnPurchaseSucceeded;
 
         closeButton.onClick.AddListener(() => ShopManager.Instance.CloseShop());
 
@@ -38,6 +43,12 @@ public class ShopUI : MonoBehaviour
         if (ShopManager.Instance == null) return;
         ShopManager.Instance.onShopOpen  -= OnShopOpen;
         ShopManager.Instance.onShopClose -= OnShopClose;
+        ShopManager.Instance.onPurchaseSucceeded -= OnPurchaseSucceeded;
+    }
+
+    private void OnPurchaseSucceeded(ItemDefinition item)
+    {
+        purchasePopup?.Enqueue(item);
     }
 
     void Update()

@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LevelDefinition
   levelID: S001_TG01
   displayName: TrainingGrounds
-  sceneName: TrainingGrounds
+  sceneName: Sector1_TrainingGrounds
   waves:
-  - {fileID: 11400000, guid: 945f73483a7f6ad46ba3890ddc872ce9, type: 2}
-  - {fileID: 11400000, guid: bb16884e8e9fcb847a0b0f509fb37ebf, type: 2}
+  - {fileID: 11400000, guid: 3feee6ee9447d7a47b271eccbcf8a2c0, type: 2}
+  - {fileID: 11400000, guid: 8cf02a56a0224b442b315b5027ebacab, type: 2}
   - {fileID: 11400000, guid: 84c6d18050a90a944bd17bfac65c3559, type: 2}
   - {fileID: 11400000, guid: 3feee6ee9447d7a47b271eccbcf8a2c0, type: 2}
   - {fileID: 11400000, guid: 8cf02a56a0224b442b315b5027ebacab, type: 2}
@@ -36,3 +36,4 @@ MonoBehaviour:
     Fighter Pilot LIcense.
   creditReward: 500
   xpReward: 150
+  killPerformanceTiers: []

@@ -31,7 +31,12 @@ public class ArenaDot : MonoBehaviour
         Vector3 offset = target.position - player.position;
         float nx = offset.x / arenaRadius;
         float ny = offset.z / arenaRadius;
+        Vector2 normalized = new(nx, ny);
 
-        rectTransform.anchoredPosition = new Vector2(nx * minimapRadius, ny * minimapRadius);
+        // Keep direction but clamp any out-of-range enemies to radar edge.
+        if (normalized.sqrMagnitude > 1f)
+            normalized = normalized.normalized;
+
+        rectTransform.anchoredPosition = normalized * minimapRadius;
     }
 }

@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecc0ec0da7f4ca4087a5399d1c55c49, type: 3}
+  m_Name: ArenaEnemyRapid
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyWeaponDefinition
+  shotSlots:
+  - bulletPrefab: {fileID: 4737436914770087329, guid: 374e5ec28f4c4d65a35f46953a3d1888, type: 3}
+    muzzleIndex: 0
+    angleOffset: 0
+    positionOffset: {x: 0, y: 0, z: 0}
+    spawnDelay: 0
+    appliesSlow: 0
+    slowPercent: 0
+    slowDuration: 0
+  fireRate: 0.35
+  burstCount: 1
+  burstInterval: 0
+  defaultTargetTag: Player
+  sourceId: ArenaEnemyRapid

@@ -125,7 +125,7 @@ Material:
     - _ShadowSoftness: 0.051
     - _ShadowStrength: 0.465
     - _ShadowThreshold: 0.353
-    - _Smoothness: 0.62
+    - _Smoothness: 0.4
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1

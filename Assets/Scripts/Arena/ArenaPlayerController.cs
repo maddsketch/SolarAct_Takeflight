@@ -3,9 +3,10 @@ using UnityEngine.InputSystem;
 using System.Collections;
 
 // Twin-stick arena player.
-// Left stick / WASD = move. Right stick / Mouse = aim. Right trigger / LMB = shoot.
+// Left stick / WASD = move. Right stick (when pushed) or Mouse = aim. Right trigger / LMB = shoot.
 [RequireComponent(typeof(Health))]
 [RequireComponent(typeof(PlayerInput))]
+[RequireComponent(typeof(PlayerInvincibilityPulse))]
 public class ArenaPlayerController : MonoBehaviour
 {
     [System.Serializable]
@@ -38,6 +39,16 @@ public class ArenaPlayerController : MonoBehaviour
     [SerializeField] private float hitSparkVfxLifetime = 2f;
     [SerializeField] private GameObject deathExplosionVfxPrefab;
     [SerializeField] private float deathExplosionVfxLifetime = 3f;
+    [SerializeField, Min(0f)] private float enemyContactImpactMagnitude = 1f;
+    [SerializeField, Min(0f)] private float enemyContactInvincibilityDuration = 3f;
+    [Header("Enemy Contact Knockback")]
+    [SerializeField, Min(0f)] private float enemyContactKnockbackDistance = 1.2f;
+    [SerializeField, Min(0.01f)] private float enemyContactKnockbackDuration = 0.12f;
+    [Header("Movement Constraints")]
+    [SerializeField] private bool lockYPosition = true;
+    [SerializeField] private float lockedYPosition;
+    [Header("Aim")]
+    [SerializeField, Min(0f)] private float aimStickDeadZone = 0.1f;
 
     private InputAction moveAction;
     private InputAction aimAction;
@@ -51,13 +62,20 @@ public class ArenaPlayerController : MonoBehaviour
     private Camera mainCam;
     private Health health;
     private MovementStatusEffects movementStatusEffects;
+    private CameraFollow cameraFollow;
+    private PlayerInvincibilityPulse invincibilityPulse;
+    private Vector3 knockbackVelocity;
 
     void Awake()
     {
         health = GetComponent<Health>();
         movementStatusEffects = GetComponent<MovementStatusEffects>();
+        cameraFollow = Camera.main != null ? Camera.main.GetComponent<CameraFollow>() : FindAnyObjectByType<CameraFollow>();
+        invincibilityPulse = GetComponent<PlayerInvincibilityPulse>();
+        lockedYPosition = transform.position.y;
         health.onDeath.AddListener(OnDeath);
         health.onDamaged.AddListener(OnDamaged);
+        health.onDamagedWithImpact.AddListener(OnDamagedWithImpact);
 
         playerInput = GetComponent<PlayerInput>();
         TryResolveActions();
@@ -67,6 +85,7 @@ public class ArenaPlayerController : MonoBehaviour
 
     void OnEnable()
     {
+        RefreshLockedYPosition();
         TryResolveActions();
     }
 
@@ -75,6 +94,7 @@ public class ArenaPlayerController : MonoBehaviour
         if (health == null) return;
         health.onDeath.RemoveListener(OnDeath);
         health.onDamaged.RemoveListener(OnDamaged);
+        health.onDamagedWithImpact.RemoveListener(OnDamagedWithImpact);
     }
 
     void Update()
@@ -106,45 +126,62 @@ public class ArenaPlayerController : MonoBehaviour
         sprintAction = actions["Sprint"];
     }
 
+    public void RefreshLockedYPosition() => lockedYPosition = transform.position.y;
+    public void SetLockedYPosition(float y) => lockedYPosition = y;
+
     private void HandleMovement()
     {
         moveInput = moveAction.ReadValue<Vector2>();
         float currentSpeed = sprintAction.IsPressed() ? moveSpeed * sprintMultiplier : moveSpeed;
         currentSpeed *= movementStatusEffects != null ? movementStatusEffects.GetSpeedMultiplier() : 1f;
         Vector3 move = new Vector3(moveInput.x, 0f, moveInput.y) * currentSpeed * Time.deltaTime;
+        move += knockbackVelocity * Time.deltaTime;
+        knockbackVelocity *= Mathf.Exp(-8f * Time.deltaTime);
         Vector3 next = transform.position + move;
 
         if (CircleBoundary.Instance != null)
             next = CircleBoundary.Instance.Clamp(next);
 
         transform.position = next;
+        EnforceYLock();
     }
 
     private void HandleAim()
     {
+        // Right stick aims when pushed past dead zone; otherwise mouse (so K&M works with a gamepad plugged in).
         var gamepad = Gamepad.current;
-        if (gamepad != null)
+        float deadZoneSq = aimStickDeadZone * aimStickDeadZone;
+        Vector2 stick = gamepad != null ? gamepad.rightStick.ReadValue() : Vector2.zero;
+        bool useRightStick = gamepad != null && stick.sqrMagnitude > deadZoneSq;
+
+        if (useRightStick)
         {
-            // Gamepad: right stick gives direction directly
-            Vector2 stick = gamepad.rightStick.ReadValue();
-            if (stick.sqrMagnitude > 0.1f)
-                aimDirection = new Vector3(stick.x, 0f, stick.y).normalized;
+            aimDirection = new Vector3(stick.x, 0f, stick.y).normalized;
         }
         else
         {
-            // Mouse: raycast screen position onto the Y=0 world plane
-            Vector2 mouseScreen = aimAction.ReadValue<Vector2>();
-            Ray ray = mainCam.ScreenPointToRay(new Vector3(mouseScreen.x, mouseScreen.y, 0f));
-            Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
-            if (groundPlane.Raycast(ray, out float distance))
+            if (mainCam == null)
+                mainCam = Camera.main;
+
+            if (mainCam != null && aimAction != null)
             {
-                Vector3 worldPoint = ray.GetPoint(distance);
-                aimDirection = (worldPoint - transform.position).normalized;
-                aimDirection.y = 0f;
+                float aimPlaneY = lockYPosition ? lockedYPosition : transform.position.y;
+                Vector3 planePoint = new Vector3(transform.position.x, aimPlaneY, transform.position.z);
+                Plane groundPlane = new Plane(Vector3.up, planePoint);
+
+                Vector2 mouseScreen = aimAction.ReadValue<Vector2>();
+                Ray ray = mainCam.ScreenPointToRay(new Vector3(mouseScreen.x, mouseScreen.y, 0f));
+                if (groundPlane.Raycast(ray, out float distance))
+                {
+                    Vector3 worldPoint = ray.GetPoint(distance);
+                    Vector3 flat = worldPoint - transform.position;
+                    flat.y = 0f;
+                    if (flat.sqrMagnitude > 1e-6f)
+                        aimDirection = flat.normalized;
+                }
             }
         }
 
-        // Rotate ship to face aim direction
         if (aimDirection != Vector3.zero)
             transform.rotation = Quaternion.LookRotation(aimDirection, Vector3.up);
     }
@@ -264,10 +301,48 @@ public class ArenaPlayerController : MonoBehaviour
         SpawnVfx(hitSparkVfxPrefab, hitSparkVfxLifetime);
     }
 
+    private void OnDamagedWithImpact(float impactMagnitude)
+    {
+        if (cameraFollow == null)
+            cameraFollow = Camera.main != null ? Camera.main.GetComponent<CameraFollow>() : FindAnyObjectByType<CameraFollow>();
+        cameraFollow?.TriggerHeavyHitShake(impactMagnitude);
+    }
+
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Enemy"))
-            health.TakeDamage(1);
+        {
+            health.TakeDamage(1, enemyContactImpactMagnitude);
+            ApplyContactKnockback(other.transform.position);
+            ApplyEnemyContactInvincibility();
+        }
+    }
+
+    private void ApplyContactKnockback(Vector3 enemyPosition)
+    {
+        if (enemyContactKnockbackDistance <= 0f || enemyContactKnockbackDuration <= 0f)
+            return;
+
+        Vector3 away = transform.position - enemyPosition;
+        away.y = 0f;
+        if (away.sqrMagnitude < 0.0001f)
+            away = -transform.forward;
+        else
+            away.Normalize();
+
+        float initialSpeed = enemyContactKnockbackDistance / enemyContactKnockbackDuration;
+        knockbackVelocity = away * initialSpeed;
+    }
+
+    private void ApplyEnemyContactInvincibility()
+    {
+        if (enemyContactInvincibilityDuration <= 0f)
+            return;
+
+        health.SetInvincible(enemyContactInvincibilityDuration);
+        if (invincibilityPulse == null)
+            invincibilityPulse = GetComponent<PlayerInvincibilityPulse>();
+        invincibilityPulse?.StartPulse(enemyContactInvincibilityDuration);
     }
 
     private void SpawnVfx(GameObject prefab, float lifetime)
@@ -277,5 +352,18 @@ public class ArenaPlayerController : MonoBehaviour
         GameObject vfx = Instantiate(prefab, transform.position, Quaternion.identity);
         if (lifetime > 0f)
             Destroy(vfx, lifetime);
+    }
+
+    private void EnforceYLock()
+    {
+        if (!lockYPosition)
+            return;
+
+        Vector3 pos = transform.position;
+        if (Mathf.Abs(pos.y - lockedYPosition) <= 0.0001f)
+            return;
+
+        pos.y = lockedYPosition;
+        transform.position = pos;
     }
 }

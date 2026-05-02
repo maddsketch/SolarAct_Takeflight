@@ -6,6 +6,7 @@ public class Bullet : MonoBehaviour
     [SerializeField] private int damage = 1;
     [SerializeField] private float lifetime = 3f;
     [SerializeField] private string targetTag = "Enemy";
+    [SerializeField, Min(0f)] private float impactMagnitude = 1f;
     // +Z for player bullets (moving up screen), -Z for enemy bullets (moving down)
     [SerializeField] private Vector3 direction = Vector3.forward;
     [Header("On-Hit Effects")]
@@ -39,9 +40,13 @@ public class Bullet : MonoBehaviour
     {
         if (other.isTrigger) return;
 
+        // Enemy bullets (target Player) should pass through other enemies.
+        if (targetTag == "Player" && other.CompareTag("Enemy"))
+            return;
+
         if (other.CompareTag(targetTag))
         {
-            other.GetComponent<Health>()?.TakeDamage(damage);
+            other.GetComponent<Health>()?.TakeDamage(damage, impactMagnitude);
             if (appliesSlow)
                 other.GetComponent<MovementStatusEffects>()?.ApplySlow(slowPercent, slowDuration, slowSourceId);
         }

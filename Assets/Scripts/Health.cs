@@ -12,9 +12,10 @@ public class Health : MonoBehaviour
     public int Current => currentHealth;
     public int Max => maxHealth;
 
-    public UnityEvent onDeath;
-    public UnityEvent onDamaged;
-    public UnityEvent<int, int> onHealthChanged; // current, max
+    public UnityEvent onDeath = new UnityEvent();
+    public UnityEvent onDamaged = new UnityEvent();
+    public UnityEvent<float> onDamagedWithImpact = new UnityEvent<float>();
+    public UnityEvent<int, int> onHealthChanged = new UnityEvent<int, int>(); // current, max
 
     void Awake()
     {
@@ -30,7 +31,7 @@ public class Health : MonoBehaviour
     public void Heal(int amount)
     {
         currentHealth = Mathf.Min(currentHealth + amount, maxHealth);
-        onHealthChanged.Invoke(currentHealth, maxHealth);
+        onHealthChanged?.Invoke(currentHealth, maxHealth);
     }
 
     public void SetInvincible(float duration)
@@ -43,28 +44,36 @@ public class Health : MonoBehaviour
         int diff = newMax - maxHealth;
         maxHealth = newMax;
         currentHealth = Mathf.Clamp(currentHealth + diff, 1, maxHealth);
-        onHealthChanged.Invoke(currentHealth, maxHealth);
+        onHealthChanged?.Invoke(currentHealth, maxHealth);
     }
 
     // Directly set current HP — used when restoring from save data.
     public void SetCurrentHealth(int amount)
     {
         currentHealth = Mathf.Clamp(amount, 0, maxHealth);
-        onHealthChanged.Invoke(currentHealth, maxHealth);
+        onHealthChanged?.Invoke(currentHealth, maxHealth);
     }
 
     public void TakeDamage(int amount)
+    {
+        TakeDamage(amount, 0f);
+    }
+
+    public void TakeDamage(int amount, float impactMagnitude)
     {
         if (invincibilityTimer > 0f) return;
 
         currentHealth = Mathf.Max(0, currentHealth - amount);
         invincibilityTimer = invincibilityDuration;
 
-        onHealthChanged.Invoke(currentHealth, maxHealth);
+        onHealthChanged?.Invoke(currentHealth, maxHealth);
 
         if (currentHealth == 0)
-            onDeath.Invoke();
+            onDeath?.Invoke();
         else
-            onDamaged.Invoke();
+        {
+            onDamaged?.Invoke();
+            onDamagedWithImpact?.Invoke(Mathf.Max(0f, impactMagnitude));
+        }
     }
 }

@@ -41,13 +41,7 @@ public class InteractionDetector : MonoBehaviour
         if (interactAction == null)
             return;
 
-        // Hand control to DialogueManager or ShopManager while they are active
-        bool uiBlocking = (DialogueManager.Instance      != null && DialogueManager.Instance.IsOpen)
-                       || (ShopManager.Instance         != null && ShopManager.Instance.IsOpen)
-                       || (InventoryUI.Instance         != null && InventoryUI.Instance.IsOpen)
-                       || (EnvironmentStoryUI.Instance  != null && EnvironmentStoryUI.Instance.IsOpen)
-                       || (CosmeticMenuUI.Instance      != null && CosmeticMenuUI.Instance.IsOpen);
-        if (uiBlocking)
+        if (OverworldUiBlocker.IsBlocking)
         {
             // Clear nearest so the prompt hides during dialogue
             if (nearest != null)
